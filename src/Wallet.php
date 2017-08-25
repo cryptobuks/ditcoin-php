@@ -1,6 +1,6 @@
 <?php
 
-namespace Monero;
+namespace Ditcoin;
 
 use Graze\GuzzleHttp\JsonRpc\Client;
 
@@ -11,7 +11,7 @@ class Wallet
      * @param string $hostname
      * @param int $port
      */
-    function __construct($hostname = 'http://127.0.0.1', $port = 18082)
+    function __construct($hostname = 'http://127.0.0.1', $port = 19092)
     {
         $url = $hostname.':'.$port .'/json_rpc';
         $this->client = Client::factory($url);
@@ -46,13 +46,13 @@ class Wallet
     public function _buildTransfer($options)
     {
         $destinations = $options['destinations'];
-        // Convert Monero amount to atomic units
+        // Convert Ditcoin amount to atomic units
         if(gettype($destinations) == "object"){
-            $destinations->amount = $destinations->amount * 1e12;
+            $destinations->amount = $destinations->amount * 1e8;
             $destinations = array($destinations);
         } else {
             foreach ($destinations as &$destination){
-                $destination->amount = $destination->amount * 1e12;
+                $destination->amount = $destination->amount * 1e8;
             }
         }
         // Define Mixin
@@ -112,7 +112,7 @@ class Wallet
     }
 
     /**
-     * Transfer Monero to a single recipient or group of recipients
+     * Transfer Ditcoin to a single recipient or group of recipients
      * @param array $options
      * @return string
      */

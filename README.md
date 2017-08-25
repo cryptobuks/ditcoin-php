@@ -1,36 +1,36 @@
-# Monero-PHP
+# Ditcoin-PHP
 
-A PHP library for the Monero `simplewallet` JSON-RPC interface. 
+A PHP library for the Ditcoin `simplewallet` JSON-RPC interface. 
 
-For more information about Monero, please visit https://getmonero.org/home.
+For more information about Ditcoin, please visit https://ditcoin.io.
 
 If you found this useful, feel free to donate!
 
-XMR: `47Vmj6BXSRPax69cVdqVP5APVLkcxxjjXdcP9fJWZdNc5mEpn3fXQY1CFmJDvyUXzj2Fy9XafvUgMbW91ZoqwqmQ6RjbVtp`
+XMR: `9RUGwFu3WGh3wAkeWWzMNiQXiW9ChYRpH974mDdrGcjpEcpPrz143oc9sV1W8YyAUwCztbfxt9usZSMVnSBwPxCaDXzhYWz`
 
 ## Installation
 
 Install the library using Composer.
     
-    composer require psychiccat/monero-php
+    composer require ditcoin/ditcoin-php
 
 ## Create an Instance of the Wallet
 
 ```php
 require 'vendor/autoload.php';
-use Monero\Wallet;
+use Ditcoin\Wallet;
 
-$wallet = new Monero\Wallet();
+$wallet = new Ditcoin\Wallet();
 ```
 
-Default hostname and port connects to http://127.0.0.1:18082.
+Default hostname and port connects to http://127.0.0.1:19092.
 
 To connect to an external IP or different port:
 
 ```php
 $hostname = YOUR_WALLET_IP;
 $port = YOUR_WALLET_PORT;
-$wallet = new Monero\Wallet($hostname, $port);
+$wallet = new Ditcoin\Wallet($hostname, $port);
 ```
 
 ## Wallet Methods
@@ -41,12 +41,12 @@ $wallet = new Monero\Wallet($hostname, $port);
 $balance = $wallet->getBalance();
 ```
 
-Responds with the current balance and unlocked (spendable) balance of the wallet in atomic units. Divide by 1e12 to convert.
+Responds with the current balance and unlocked (spendable) balance of the wallet in atomic units. Divide by 1e8 to convert.
     
 Example response: 
 
 ```
-{ balance: 3611980142579999, unlocked_balance: 3611980142579999 }
+{ balance: 361198014257, unlocked_balance: 361198014257 }
 ```
 
 ### getAddress
@@ -55,12 +55,12 @@ Example response:
 $address = $wallet->getAddress();
 ```
 
-Responds with the Monero address of the wallet.
+Responds with the Ditcoin address of the wallet.
 
 Example response:
 
 ```
-{ address: '47Vmj6BXSRPax69cVdqVP5APVLkcxxjjXdcP9fJWZdNc5mEpn3fXQY1CFmJDvyUXzj2Fy9XafvUgMbW91ZoqwqmQ6RjbVtp' }
+{ address: '9RUGwFu3WGh3wAkeWWzMNiQXiW9ChYRpH974mDdrGcjpEcpPrz143oc9sV1W8YyAUwCztbfxt9usZSMVnSBwPxCaDXzhYWz' }
 ```
 
 ### transfer
@@ -69,7 +69,7 @@ Example response:
 $tx_hash = $wallet->transfer($options);
 ```
 
-Transfers Monero to a single recipient OR a group of recipients in a single transaction. Responds with the transaction hash of the payment.
+Transfers Ditcoin to a single recipient OR a group of recipients in a single transaction. Responds with the transaction hash of the payment.
 
 Parameters:
 
@@ -79,7 +79,7 @@ Parameters:
 $options = [
     'destinations' => (object) [
         'amount' => '1',
-        'address' => '47Vmj6BXSRPax69cVdqVP5APVLkcxxjjXdcP9fJWZdNc5mEpn3fXQY1CFmJDvyUXzj2Fy9XafvUgMbW91ZoqwqmQ6RjbVtp'
+        'address' => '9RUGwFu3WGh3wAkeWWzMNiQXiW9ChYRpH974mDdrGcjpEcpPrz143oc9sV1W8YyAUwCztbfxt9usZSMVnSBwPxCaDXzhYWz'
     ]
 ];
 ```
@@ -199,13 +199,13 @@ Returns the standard address and payment ID corresponding for a given integrated
 
 Parameters:
 
-* `integrated_address` - an Monero integrated address (*string*)
+* `integrated_address` - an Ditcoin integrated address (*string*)
 
 Example response:
 
 ```
 { payment_id: '<61eec5ffd3b9cb57>',
-  standard_address: '47Vmj6BXSRPax69cVdqVP5APVLkcxxjjXdcP9fJWZdNc5mEpn3fXQY1CFmJDvyUXzj2Fy9XafvUgMbW91ZoqwqmQ6RjbVtp' }
+  standard_address: '9RUGwFu3WGh3wAkeWWzMNiQXiW9ChYRpH974mDdrGcjpEcpPrz143oc9sV1W8YyAUwCztbfxt9usZSMVnSBwPxCaDXzhYWz' }
 ```
 
 ### getHeight 
